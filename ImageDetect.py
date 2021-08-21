@@ -28,8 +28,6 @@ for i in range(1,7):
         custom_config = r'--oem 3 -l tur --psm '
         custom_config += str(i)
         text = pytesseract.image_to_string(img, config=custom_config)
-        print(text)
-        print("-------------------------------")
         for l in lines:
             if text.lower().find(l.lower()) != -1 :
                 forbiddenWordDetected = True
