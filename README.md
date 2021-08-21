@@ -1,6 +1,7 @@
 INSTALLATION Packages
 
 sudo chmod 777 package.sh
+
 ./package.sh # Installing some python packages.
 
 USAGE
