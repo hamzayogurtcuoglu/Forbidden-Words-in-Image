@@ -1,8 +1,7 @@
 # INSTALLATION Packages
 
-sudo chmod 777 package.sh
-
-./package.sh # Installing some python packages.
+Make sure that your pip version is up-to-date (19.3 is the minimum supported version)
+./package.sh # Install dependencies
 
 # USAGE
 
