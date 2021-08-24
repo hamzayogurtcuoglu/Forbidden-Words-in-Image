@@ -4,11 +4,21 @@ import argparse
 import os
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-p", "--path", required=True,help="Image Path")
+group = ap.add_mutually_exclusive_group(required=True)
+group.add_argument("-p", "--path", help="Folder Path for bulk check")
+group.add_argument("-f", "--file", help="Image Path for single check")
 args = vars(ap.parse_args())
 
-imgPath = os.path.join(os.getcwd(), args['path'])
-img = cv2.imread(imgPath)
+imageList = []
+
+if args['file']:
+    print("Checking single file: " + args['file'])
+    imageList += os.path.join(os.getcwd(), args['file'])
+
+if args['path']:
+    print("Checking multiple files in folder: " + args['path'])
+    imageList = os.listdir(args['path'])
+    imageList = list(map(lambda x: args['path'] + x , imageList))
 
 backListWord = open('Blacklistwords.txt', 'r')
 lines = backListWord.readlines()
@@ -46,18 +56,22 @@ Page segmentation modes:
 Only the first 7 mode are required for our case:
 """
 
-for i in range(1,7):
-    try:
-        custom_config = r'--oem 3 -l tur --psm '
-        custom_config += str(i)
-        text = pytesseract.image_to_string(img, config=custom_config)
-        for l in lines:
-            if text.lower().find(l.lower()) != -1 :
-                forbiddenWordDetected = True
-    except:
-        continue
+for image in imageList:
+    img = cv2.imread(image)
 
-if forbiddenWordDetected:
-    print ("Danger detected.")
-else:
-    print("The danger could not be detected.")
+    for i in range(1,7):
+        forbiddenWordDetected = False
+        try:
+            custom_config = r'--oem 3 -l tur --psm '
+            custom_config += str(i)
+            text = pytesseract.image_to_string(img, config=custom_config)
+            for l in lines:
+                if text.lower().find(l.lower()) != -1 :
+                    forbiddenWordDetected = True
+        except:
+            continue
+
+    if forbiddenWordDetected:
+        print ("Danger detected in: " + image)
+    else:
+        print("The danger could not be detected in: " + image)
