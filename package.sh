@@ -1,7 +1,2 @@
-sudo apt install tesseract-ocr
-sudo apt install libtesseract-dev
-sudo apt install python3-pip
-pip install pytesseract
-pip install opencv-python
-pip install matplotlib
-sudo apt-get install tesseract-ocr-tur
+sudo apt install -y tesseract-ocr libtesseract-dev python3-pip tesseract-ocr-tur
+pip3 install -r requirements.txt
