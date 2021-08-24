@@ -13,12 +13,12 @@ imageList = []
 
 if args['file']:
     print("Checking single file: " + args['file'])
-    imageList += os.path.join(os.getcwd(), args['file'])
-
+    imageList.append(os.path.join(os.getcwd(), args['file']));
+    
 if args['path']:
     print("Checking multiple files in folder: " + args['path'])
     imageList = os.listdir(args['path'])
-    imageList = list(map(lambda x: args['path'] + x , imageList))
+    imageList = list(map(lambda x: args['path'] + '/' +  x , imageList))
 
 backListWord = open('Blacklistwords.txt', 'r')
 lines = backListWord.readlines()
