@@ -1,3 +1,5 @@
 pytesseract
 opencv-python
 matplotlib
+pandas
+google-cloud-vision
