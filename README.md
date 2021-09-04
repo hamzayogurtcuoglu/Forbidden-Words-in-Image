@@ -9,6 +9,7 @@ python3 ImageDetect.py -p Demo.jpg
 
 USAGE of GoogleVisionAPIHandWritingDetect:
 Follow configuration instructions of https://www.youtube.com/watch?v=wfyDiLMGqDM
+
 python3 GoogleVisionAPIHandWritingDetect.py -f Demo.jpg
 
 
