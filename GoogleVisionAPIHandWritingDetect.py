@@ -10,6 +10,7 @@ ap = argparse.ArgumentParser()
 group = ap.add_mutually_exclusive_group(required=True)
 group.add_argument("-p", "--path", help="Folder Path for bulk check")
 group.add_argument("-f", "--file", help="Image Path for single check")
+ap.add_argument("-v", "--verbose", action='store_true', help="Increase verbosity")
 args = vars(ap.parse_args())
 
 imageList = []
@@ -45,7 +46,10 @@ for image in imageList:
     response = client.document_text_detection(image=imageContent)
 
     text = response.full_text_annotation.text
-    # print(text)
+    
+    if args['verbose']:
+        print(text)
+    
     forbiddenWordDetected = False
     for l in lines:
         if text.lower().find(l.lower()) != -1:

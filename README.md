@@ -1,7 +1,7 @@
 # INSTALLATION Packages
 
 Make sure that your pip version is up-to-date (19.3 is the minimum supported version)
-./package.sh # Install dependencies
+./install_dependencies.sh
 
 # USAGE
 
